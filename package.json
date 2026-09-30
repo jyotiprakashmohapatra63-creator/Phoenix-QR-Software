@@ -1,0 +1,52 @@
+{
+  "name": "phoenix-qr-software",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Phoenix Edit Point Payment QR desktop and Android app.",
+  "main": "main.cjs",
+  "scripts": {
+    "web": "npx serve www -l 5173",
+    "desktop": "electron .",
+    "desktop:build": "electron-builder --win nsis portable --publish never",
+    "android:add": "cap add android",
+    "android:sync": "cap sync android",
+    "android:debug": "cap sync android && cd android && gradlew.bat assembleDebug",
+    "android:icons": "capacitor-assets generate --android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^7.4.3",
+    "electron": "^37.4.0",
+    "electron-builder": "^26.0.12",
+    "serve": "^14.2.4"
+  },
+  "build": {
+    "appId": "com.phoenixeditpoint.qr",
+    "productName": "Phoenix Edit Point QR",
+    "files": [
+      "main.cjs",
+      "www/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}

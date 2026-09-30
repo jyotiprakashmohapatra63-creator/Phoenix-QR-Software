@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#120f0d" />
+  <title>Phoenix Edit Point — Vintage Studio &amp; Color Lab</title>
+
+  <!-- Authentic Vintage Typography: Royal Serif, Editorial Display & Antique Typewriter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600&family=Marcellus&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+  <!-- Offline local libraries with CDN fallbacks -->
+  <script src="qrcode.min.js"></script>
+  <script src="html2canvas.min.js"></script>
+  <script src="logo_data.js"></script>
+  <script src="full_logo_data.js"></script>
+  <script>
+    if (typeof qrcode === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"><\/script>');
+    }
+    if (typeof html2canvas === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"><\/script>');
+    }
+  </script>
+
+  <style>
+    :root {
+      --grade: #8e1b21;
+      --grade-rgb: 142, 27, 33;
+      --grade-dark-rgb: 64, 12, 15;
+      --brass: #c9a050;
+      --brass-rgb: 201, 160, 80;
+      --brass-light: #f5df97;
+      --brass-dark: #7a5d1b;
+      --brass-glow: rgba(201, 160, 80, 0.28);
+      --parchment: #f9f5eb;
+      --parchment-dim: #cfc2a5;
+      --parchment-muted: #968a72;
+      --wood-dark: #120f0d;
+      --wood-panel: #1b1613;
+      --wood-card: #15110f;
+      --wood-border: rgba(201, 160, 80, 0.26);
+      --wood-border-bright: rgba(201, 160, 80, 0.55);
+    }
+    * { box-sizing: border-box; }
+    html { min-height: 100%; background: #0d0a09; }
+
+    /* Authentic Vintage Film Studio & Darkroom Ambiance */
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--parchment);
+      font-family: 'Marcellus', 'Cinzel', serif;
+      background:
+        radial-gradient(circle at 50% 8%, var(--brass-glow), transparent 42rem),
+        linear-gradient(180deg, rgba(14, 11, 9, 0.94) 0%, rgba(22, 17, 14, 0.91) 45%, rgba(10, 8, 7, 0.98) 100%),
+        url('di-suite-background.png') center / cover fixed !important;
+    }
+
+    /* Subtle antique film grain */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: repeating-radial-gradient(circle at 20% 30%, #fff, #000 1.5px);
+      background-size: 3px 3px;
+    }
+
+    .app { width: min(1400px, calc(100% - 36px)); margin: 0 auto; position: relative; }
+    h1, h2, h3, p { margin: 0; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    /* Vintage Studio Header — Classic Cinema Guild Style */
+    .topbar {
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      border-bottom: 2px solid var(--brass);
+      box-shadow: 0 6px 28px rgba(0, 0, 0, 0.6), inset 0 -1px 0 var(--brass-dark);
+      background: linear-gradient(180deg, rgba(32, 25, 20, 0.85), rgba(16, 13, 10, 0.95));
+      padding: 0 16px;
+      border-radius: 0 0 8px 8px;
+    }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .brand-logo {
+      width: 54px;
+      height: 54px;
+      overflow: hidden;
+      border: 2px solid var(--brass);
+      border-radius: 6px;
+      background: #0d0b09;
+      box-shadow: 0 0 16px var(--brass-glow), inset 0 0 12px rgba(0, 0, 0, 0.8);
+      flex-shrink: 0;
+    }
+    .brand-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .kicker {
+      color: var(--brass-light);
+      font: 700 10px "Cinzel", serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .kicker span { color: var(--brass); font-size: 8px; }
+    h1 {
+      margin-top: 2px;
+      font: 800 clamp(15px, 2.2vw, 22px) 'Cinzel', serif;
+      letter-spacing: 0.09em;
+      color: #fff9ed;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px var(--brass-glow);
+    }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .studio-seal {
+      color: var(--brass-light);
+      font: 700 10px "Cinzel", serif;
+      letter-spacing: 0.16em;
+      white-space: nowrap;
+      background: rgba(22, 17, 14, 0.7);
+      padding: 7px 14px;
+      border: 1px solid var(--brass-dark);
+      border-radius: 4px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .studio-seal i { color: #34d399; text-shadow: 0 0 8px rgba(52, 211, 153, 0.5); }
+
+    /* Vintage Antique Brass Buttons */
+    .button {
+      min-height: 40px;
+      padding: 8px 16px;
+      border: 1px solid var(--brass-dark);
+      border-radius: 4px;
+      color: #f7eedb;
+      background: linear-gradient(180deg, #2f251d, #1a1410);
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      transition: all 0.2s ease;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 3px 8px rgba(0, 0, 0, 0.5);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--brass);
+      color: #ffffff;
+      box-shadow: 0 5px 16px var(--brass-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    }
+    .button i { color: var(--brass); font-size: 13px; }
+    .button.primary {
+      border: 1px solid rgba(var(--grade-rgb), 0.6);
+      color: #ffffff;
+      background: linear-gradient(180deg, var(--grade) 0%, rgba(var(--grade-dark-rgb), 1) 100%);
+      box-shadow: 0 4px 18px rgba(var(--grade-rgb), 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+    .button.primary:hover {
+      background: linear-gradient(180deg, var(--grade) 15%, rgba(var(--grade-dark-rgb), 0.9) 100%);
+      box-shadow: 0 6px 24px rgba(var(--grade-rgb), 0.65);
+      filter: brightness(1.1);
+    }
+    .button.primary i { color: #ffe6e6; }
+
+    /* Workspace Layout */
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.94fr) minmax(380px, 1.06fr);
+      gap: 26px;
+      padding: 28px 0 32px;
+      align-items: start;
+    }
+
+    /* Handcrafted Studio Panel (Dark Walnut & Brass Trim) */
+    .panel {
+      overflow: hidden;
+      border: 1px solid var(--wood-border);
+      border-radius: 8px;
+      background: linear-gradient(165deg, rgba(27, 22, 19, 0.96), rgba(16, 13, 11, 0.97));
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      position: relative;
+    }
+    .panel::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid var(--wood-border);
+      opacity: 0.4;
+      pointer-events: none;
+      border-radius: 6px;
+    }
+    .panel-head {
+      height: 58px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid var(--wood-border);
+      background: linear-gradient(180deg, rgba(38, 30, 25, 0.65), rgba(19, 15, 12, 0.85));
+    }
+    .panel-head h2 {
+      font: 700 13px 'Cinzel', serif;
+      letter-spacing: 0.14em;
+      color: #ede2cd;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .panel-head h2 i { color: var(--brass); font-size: 14px; }
+    .panel-badge {
+      color: var(--brass-light);
+      font: 700 10px "Cinzel", serif;
+      letter-spacing: 0.14em;
+      white-space: nowrap;
+    }
+    .controls { padding: 22px; }
+
+    /* Vintage Studio Identity Plaque */
+    .identity {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      min-height: 84px;
+      margin-bottom: 22px;
+      padding: 14px;
+      position: relative;
+      border: 1px solid var(--brass-dark);
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(40, 31, 25, 0.75), rgba(20, 16, 13, 0.85));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+    .identity::after {
+      content: "❖";
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      color: var(--brass-dark);
+      font-size: 13px;
+    }
+    .identity-logo {
+      width: 58px;
+      height: 58px;
+      z-index: 1;
+      overflow: hidden;
+      flex: 0 0 auto;
+      border: 1px solid var(--brass);
+      border-radius: 6px;
+      background: #0e0c0a;
+      box-shadow: 0 0 14px var(--brass-glow);
+    }
+    .identity-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .identity-body { min-width: 0; z-index: 1; }
+    .identity-label {
+      color: var(--brass-light);
+      font: 700 9px "Cinzel", serif;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .identity h3 {
+      color: #fff9ea;
+      font: 700 18px 'Cinzel', serif;
+      letter-spacing: 0.06em;
+      margin-top: 2px;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    }
+    .locked {
+      margin-top: 4px;
+      color: var(--parchment-dim);
+      font-size: 11px;
+      font-family: 'Marcellus', serif;
+      letter-spacing: 0.04em;
+    }
+    .locked i { margin-right: 5px; color: var(--brass); font-size: 10px; }
+
+    /* Vintage Studio Input Fields */
+    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      margin-bottom: 7px;
+      color: #e5dac6;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.07em;
+    }
+    label span { color: var(--brass); font: 700 9px "Cinzel", serif; letter-spacing: 0.12em; }
+    .input-wrap { position: relative; }
+    .input-wrap > i {
+      position: absolute;
+      z-index: 1;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--brass-dark);
+      font-size: 13px;
+      pointer-events: none;
+    }
+    input {
+      width: 100%;
+      height: 44px;
+      padding: 0 14px 0 38px;
+      outline: none;
+      color: #fbf6ec;
+      border: 1px solid var(--wood-border);
+      border-radius: 5px;
+      background: rgba(12, 10, 8, 0.7);
+      font-family: 'Courier Prime', monospace;
+      font-size: 15px;
+      transition: all 0.2s;
+    }
+    input::placeholder { color: #6d6252; }
+    input:focus {
+      border-color: var(--brass);
+      background: rgba(18, 15, 12, 0.9);
+      box-shadow: 0 0 0 2px var(--brass-glow);
+    }
+    .input-wrap.money::before {
+      content: "₹";
+      position: absolute;
+      z-index: 1;
+      left: 14px;
+      top: 9px;
+      color: var(--brass-light);
+      font: 700 19px "Cinzel", serif;
+    }
+    .input-wrap.money input { padding-left: 36px; font-weight: 700; font-family: 'Courier Prime', monospace; }
+
+    /* Quick Amount Section */
+    .control-section {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--wood-border);
+    }
+    .control-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      color: #e5dac6;
+      font: 700 12px 'Cinzel', serif;
+      letter-spacing: 0.1em;
+    }
+    .control-title span i { margin-right: 7px; color: var(--brass); }
+    .clear {
+      padding: 0;
+      color: #e88686;
+      border: 0;
+      background: none;
+      font: 700 10px "Cinzel", serif;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .clear:hover { color: #ffadad; text-decoration: underline; }
+    .quick-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      min-width: 56px;
+      padding: 8px 14px;
+      color: #c9bda4;
+      border: 1px dashed var(--wood-border);
+      border-radius: 4px;
+      background: rgba(28, 23, 19, 0.55);
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .chip:hover, .chip.active {
+      color: #ffffff;
+      border-style: solid;
+      border-color: var(--brass);
+      background: linear-gradient(180deg, var(--brass-glow), rgba(122, 93, 27, 0.2));
+      box-shadow: 0 4px 12px var(--brass-glow);
+    }
+
+    /* ========================================================
+       INLINE COLLAPSIBLE THEME ACCORDION (MINIMIZE / MAXIMIZE)
+       Toggles smoothly right where user clicks the bar!
+       ======================================================== */
+    .theme-accordion {
+      margin-top: 18px;
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(18, 14, 12, 0.85);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .theme-accordion:hover {
+      border-color: rgba(52, 211, 153, 0.65);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+    .theme-accordion.expanded {
+      border-color: var(--brass);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    }
+    .theme-menu-trigger {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 16px;
+      border: none;
+      background: linear-gradient(135deg, rgba(30, 24, 19, 0.9), rgba(16, 13, 11, 0.96));
+      color: #fff9ea;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s ease;
+    }
+    .theme-accordion.expanded .theme-menu-trigger {
+      background: linear-gradient(135deg, rgba(48, 38, 30, 0.95), rgba(26, 20, 16, 0.95));
+      border-bottom: 1px solid var(--wood-border);
+    }
+    .theme-menu-trigger:hover {
+      background: linear-gradient(135deg, rgba(48, 38, 30, 0.95), rgba(26, 20, 16, 0.95));
+      color: #fff;
+    }
+    .theme-menu-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .theme-menu-trigger-left i {
+      color: #34d399;
+      font-size: 15px;
+      filter: drop-shadow(0 0 6px rgba(52, 211, 153, 0.4));
+    }
+    .theme-menu-dots {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      pointer-events: none;
+    }
+    .theme-dot-preview {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+    }
+    .theme-menu-arrow {
+      color: #34d399;
+      font-size: 13px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .theme-accordion.expanded .theme-menu-arrow {
+      transform: rotate(90deg);
+      color: var(--brass-light);
+    }
+
+    /* Accordion Body (Collapsible / Minimized by default) */
+    .theme-accordion-body {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0 16px;
+      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.35s ease;
+    }
+    .theme-accordion.expanded .theme-accordion-body {
+      max-height: 950px;
+      opacity: 1;
+      padding: 18px 16px 16px;
+      overflow: visible;
+    }
+    .theme-accordion-body .control-section {
+      margin-top: 0;
+      margin-bottom: 18px;
+      padding-top: 0;
+      border-top: none;
+    }
+    .theme-accordion-body .control-section:not(:last-child) {
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--wood-border);
+    }
+
+    /* Metallic Gold/Border Trim Swatches */
+    .brass-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; margin-bottom: 11px; }
+    .brass-chip {
+      height: 40px;
+      padding: 3px 2px;
+      border: 1px solid var(--wood-border);
+      border-radius: 5px;
+      background: rgba(14, 11, 9, 0.6);
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      cursor: pointer;
+    }
+    .brass-chip span {
+      display: block;
+      width: 100%;
+      height: 14px;
+      border-radius: 2px;
+    }
+    .brass-chip small {
+      font: 700 8.5px "Cinzel", serif;
+      color: #cfc2a5;
+      letter-spacing: 0.04em;
+    }
+    .brass-chip.active {
+      border-color: var(--brass-light);
+      box-shadow: 0 0 12px var(--brass-glow);
+      transform: scale(1.05);
+    }
+    .brass-chip.active small { color: #fff; }
+    .brass-chip[data-color="#c9a050"] span { background: linear-gradient(90deg, #c9a050, #f5df97); }
+    .brass-chip[data-color="#c0c7d0"] span { background: linear-gradient(90deg, #9ca3af, #f3f4f6); }
+    .brass-chip[data-color="#d4836a"] span { background: linear-gradient(90deg, #b86550, #f5b7a8); }
+    .brass-chip[data-color="#34d399"] span { background: linear-gradient(90deg, #059669, #6ee7b7); }
+    .brass-chip[data-color="#38bdf8"] span { background: linear-gradient(90deg, #0284c7, #7dd3fc); }
+    .brass-chip[data-color="#a37938"] span { background: linear-gradient(90deg, #784c1f, #d4a363); }
+
+    /* Film Palette Swatches & Customizer */
+    .grade-list { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; margin-bottom: 11px; }
+    .grade {
+      height: 34px;
+      padding: 3px;
+      border: 1px solid var(--wood-border);
+      border-radius: 5px;
+      background: transparent;
+      transition: all 0.2s;
+    }
+    .grade span { display: block; height: 100%; border-radius: 3px; }
+    .grade.active {
+      border-color: var(--brass-light);
+      box-shadow: 0 0 14px var(--brass-glow);
+      transform: scale(1.05);
+    }
+    .grade[data-color="#8e1b21"] span { background: linear-gradient(90deg, #8e1b21, var(--brass)); }
+    .grade[data-color="#701c36"] span { background: linear-gradient(90deg, #701c36, #3b1745); }
+    .grade[data-color="#185260"] span { background: linear-gradient(90deg, #185260, #0a2d39); }
+    .grade[data-color="#5c5520"] span { background: linear-gradient(90deg, #5c5520, #28371c); }
+    .grade[data-color="#4a154b"] span { background: linear-gradient(90deg, #4a154b, #210a22); }
+    .grade[data-color="#7a4216"] span { background: linear-gradient(90deg, #7a4216, #3d1f08); }
+
+    .color-hex-badge {
+      font: 700 11px "Courier Prime", monospace;
+      color: var(--brass-light);
+      background: rgba(14, 11, 9, 0.65);
+      padding: 3px 8px;
+      border: 1px solid var(--wood-border);
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+    }
+    .custom-color-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border: 1px solid var(--wood-border);
+      border-radius: 6px;
+      background: rgba(14, 11, 9, 0.55);
+      margin-bottom: 8px;
+    }
+    .custom-color-picker-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      position: relative;
+      user-select: none;
+    }
+    .custom-color-picker-label input[type="color"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+    .custom-color-preview {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--brass);
+      background-color: var(--grade);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      display: inline-block;
+      flex-shrink: 0;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .custom-color-picker-label:hover .custom-color-preview {
+      transform: scale(1.12);
+      box-shadow: 0 0 12px var(--brass);
+    }
+    .picker-text {
+      color: #ede2cd;
+      font: 700 11px 'Cinzel', serif;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .picker-text i {
+      color: var(--brass);
+      margin-right: 4px;
+    }
+    .hex-input-wrap {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      background: rgba(18, 14, 12, 0.85);
+      border: 1px solid var(--wood-border);
+      border-radius: 4px;
+      padding: 0 4px 0 8px;
+      height: 32px;
+    }
+    .hex-input-wrap span {
+      color: var(--brass);
+      font: 700 13px 'Courier Prime', monospace;
+    }
+    .hex-input-wrap input {
+      width: 68px;
+      height: 100%;
+      padding: 0 6px;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font: 700 13px 'Courier Prime', monospace;
+      outline: none;
+      text-transform: uppercase;
+    }
+    .hex-apply-btn {
+      padding: 4px 10px;
+      border: 1px solid var(--brass-dark);
+      border-radius: 3px;
+      background: linear-gradient(180deg, #2f251d, #1a1410);
+      color: var(--brass-light);
+      font: 700 10px 'Cinzel', serif;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .hex-apply-btn:hover {
+      border-color: var(--brass);
+      color: #fff;
+      background: #3b2f25;
+    }
+
+    .sync-theme-btn {
+      width: 100%;
+      padding: 10px 14px;
+      margin-top: 6px;
+      border: 1px dashed var(--wood-border);
+      border-radius: 5px;
+      background: rgba(22, 17, 14, 0.5);
+      color: var(--brass-light);
+      font: 700 11px 'Cinzel', serif;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+    .sync-theme-btn:hover {
+      border-color: var(--brass);
+      background: rgba(201, 160, 80, 0.12);
+      color: #fff;
+    }
+
+    .note {
+      display: flex;
+      gap: 11px;
+      margin-top: 18px;
+      padding: 13px 15px;
+      color: #cfc2a5;
+      border: 1px solid var(--wood-border);
+      border-radius: 6px;
+      background: rgba(201, 160, 80, 0.06);
+      font-size: 12px;
+      line-height: 1.45;
+      font-family: 'Marcellus', serif;
+    }
+    .note i { padding-top: 2px; color: var(--brass); }
+
+    /* Right Column: Live Poster Output */
+    .preview-column {
+      position: sticky;
+      top: 16px;
+      transition: all 0.3s ease;
+    }
+    .preview-panel-trigger {
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.25s ease;
+    }
+    .preview-panel-trigger:hover {
+      background: linear-gradient(180deg, rgba(52, 40, 32, 0.95), rgba(25, 20, 16, 0.98)) !important;
+    }
+    .preview-head-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .preview-meta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--brass-light);
+      font: 700 10px "Cinzel", serif;
+      letter-spacing: 0.14em;
+    }
+    .preview-meta i {
+      color: #34d399;
+      transition: color 0.2s ease;
+    }
+    .preview-toggle-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border: 1px solid var(--brass-dark);
+      border-radius: 4px;
+      background: rgba(14, 11, 9, 0.7);
+      color: var(--brass-light);
+      font: 700 9px "Cinzel", serif;
+      letter-spacing: 0.12em;
+      transition: all 0.2s ease;
+    }
+    .preview-panel-trigger:hover .preview-toggle-chip {
+      border-color: var(--brass);
+      color: #ffffff;
+      background: rgba(45, 35, 27, 0.85);
+      box-shadow: 0 0 8px var(--brass-glow);
+    }
+    .preview-toggle-arrow {
+      font-size: 10px;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .preview-inner {
+      padding: 22px 22px 16px;
+      max-height: 2200px;
+      opacity: 1;
+      overflow: visible;
+      transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.35s ease;
+    }
+    .preview-column.collapsed .preview-toggle-arrow {
+      transform: rotate(180deg);
+    }
+    .preview-column.collapsed .panel-head {
+      border-bottom: none;
+    }
+    .preview-column.collapsed .preview-toggle-chip {
+      color: #34d399;
+      border-color: rgba(52, 211, 153, 0.5);
+    }
+    .preview-column.collapsed .preview-inner {
+      max-height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* ========================================================
+       VINTAGE CINEMA & STUDIO PAYMENT POSTER SLATE (#paymentCard)
+       Framed like an authentic antique gold-embossed certificate
+       ======================================================== */
+    #paymentCard {
+      width: min(100%, 470px);
+      box-sizing: border-box;
+      overflow: hidden;
+      position: relative;
+      margin: 0 auto;
+      color: #f7f2e4;
+      border: 2px solid var(--brass);
+      border-radius: 10px;
+      background: #13100e;
+      outline: 1px solid var(--wood-border);
+      outline-offset: -5px;
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.8),
+        0 0 0 1px var(--wood-border),
+        inset 0 0 40px rgba(0, 0, 0, 0.7);
+    }
+    /* Inner ornamental filigree frame */
+    #paymentCard::after {
+      display: none;
+    }
+
+    /* Card Header — Velvet Crimson & Antique Walnut */
+    .card-head {
+      min-height: 224px;
+      position: relative;
+      overflow: hidden;
+      padding: 22px 25px 20px;
+      background:
+        linear-gradient(135deg, rgba(var(--grade-rgb), 0.96) 0%, rgba(var(--grade-dark-rgb), 0.93) 55%, rgba(20, 14, 12, 0.98) 100%);
+      border-bottom: 2px solid var(--brass);
+    }
+    .card-head::before {
+      display: none;
+    }
+    .card-head-content { position: relative; z-index: 1; text-align: center; }
+
+    /* Vintage Studio Guarantee Tag (Verified Green) */
+    .secure {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 13px;
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.45);
+      border-radius: 4px;
+      background: rgba(6, 40, 24, 0.75);
+      font: 700 9.5px "Cinzel", serif;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 0 12px rgba(16, 185, 129, 0.18);
+    }
+    .secure i { color: #34d399; text-shadow: 0 0 8px rgba(52, 211, 153, 0.6); }
+
+    .merchant {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    .merchant-logo { display: none; }
+    .merchant-full-logo {
+      display: block;
+      width: min(100%, 330px);
+      height: 128px;
+      object-fit: contain;
+      object-position: center center;
+    }
+    .merchant-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 3px;
+      color: #34d399;
+      font: 700 10.5px 'Cinzel', serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .merchant-badge i { color: #34d399; }
+
+    /* Card Body */
+    .card-body { position: relative; z-index: 1; padding: 22px 25px 22px; background: #14110f; }
+    .meter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--wood-border);
+      color: var(--parchment-dim);
+      font: 700 10px "Cinzel", serif;
+      letter-spacing: 0.14em;
+    }
+    .meter .grade-dot {
+      color: #34d399;
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(52, 211, 153, 0.35);
+    }
+
+    /* Amount in Vintage Serif Luxury Display */
+    .amount {
+      min-height: 48px;
+      margin: 10px 0 2px;
+      color: #fff9ed;
+      font: 800 34px 'Playfair Display', serif;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      text-align: center;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    }
+    .amount sup {
+      margin-right: 5px;
+      color: var(--brass);
+      font-size: 18px;
+      vertical-align: 11px;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+    }
+    .amount.any {
+      font-size: 21px;
+      letter-spacing: 0.08em;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      line-height: 1.8;
+      color: var(--brass-light);
+    }
+    #cardNote {
+      min-height: 20px;
+      color: #c0b39c;
+      font-size: 13px;
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+    }
+
+    /* Antique Gold-Framed QR Mount (Warm, Classic, Non-AI) */
+    .qr-zone {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin: 18px 0 15px;
+      padding: 14px;
+      border: 2px solid var(--brass);
+      border-radius: 8px;
+      background: linear-gradient(145deg, #13100e 0%, #0d0a09 60%, rgba(var(--grade-rgb), 0.15) 100%) !important;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5), inset 0 0 0 1px var(--wood-border);
+    }
+
+    #qrCanvas, #finalQrImage {
+      width: min(100%, 252px);
+      aspect-ratio: 1;
+      display: block;
+      object-fit: contain;
+      padding: 8px;
+      border: 1px solid var(--wood-border-bright);
+      border-radius: 6px;
+      background: #ffffff;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Vintage Studio Signature Ribbon */
+    .qr-signature {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 12px;
+      min-height: 48px;
+      margin: 0 0 15px;
+      padding: 7px 14px;
+      border: 1px solid var(--brass-dark);
+      border-left: 3px solid var(--brass);
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--brass-glow), rgba(28, 22, 18, 0.8) 60%, rgba(var(--grade-rgb), 0.18));
+    }
+    .qr-signature img {
+      width: 38px;
+      height: 38px;
+      object-fit: cover;
+      opacity: 1;
+      border: 1px solid var(--brass);
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .qr-signature-copy { min-width: 0; }
+    .qr-signature-copy small {
+      display: block;
+      color: var(--brass-light);
+      font: 700 8px "Cinzel", serif;
+      letter-spacing: 0.16em;
+    }
+    .qr-signature-copy strong {
+      display: block;
+      color: #fff9ea;
+      font: 700 12px 'Cinzel', serif;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* UPI Slate Bar */
+    .upi-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 11px 14px;
+      border: 1px solid var(--wood-border);
+      border-radius: 5px;
+      background: rgba(10, 8, 7, 0.75);
+    }
+    .upi-copy { min-width: 0; }
+    .upi-label { display: block; color: var(--parchment-dim); font: 700 8px "Cinzel", serif; letter-spacing: 0.16em; text-transform: uppercase; }
+    #cardUpiDisplay {
+      display: block;
+      max-width: 275px;
+      overflow: hidden;
+      margin-top: 3px;
+      color: #fcf8ee;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'Courier Prime', monospace;
+    }
+    .copy { border: 0; padding: 5px; color: var(--brass-light); background: transparent; font-size: 16px; cursor: pointer; transition: 0.2s; }
+    .copy:hover { color: #fff; transform: scale(1.15); }
+
+    /* Supported Payment Apps Ribbon */
+    .supported-apps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--wood-border);
+      color: var(--parchment-dim);
+      font: 700 10px "Cinzel", serif;
+      letter-spacing: 0.1em;
+    }
+    .supported-apps span { display: inline-flex; align-items: center; gap: 5px; }
+    .supported-apps i { color: var(--brass); }
+
+    /* Export Grid */
+    .export-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr;
+      gap: 10px;
+      margin-top: 18px;
+      padding: 0;
+    }
+    .export-grid .button {
+      min-height: 42px;
+      border-radius: 5px;
+      font-size: 12px;
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+
+    .footer {
+      padding: 0 0 28px;
+      color: #8c7d6b;
+      text-align: center;
+      font: 700 10px "Cinzel", serif;
+      letter-spacing: 0.12em;
+    }
+
+    #toast {
+      position: fixed;
+      z-index: 1100;
+      left: 50%;
+      bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: calc(100% - 28px);
+      padding: 12px 18px;
+      color: #fff9ea;
+      border: 1px solid var(--brass);
+      border-radius: 5px;
+      background: #1c1714;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transform: translate(-50%, 120px);
+      transition: 0.25s;
+    }
+    #toast.show { opacity: 1; transform: translate(-50%, 0); }
+    #toast i { color: var(--brass-light); }
+
+    @media (max-width: 940px) {
+      .workspace { grid-template-columns: 1fr; gap: 20px; }
+      .preview-column { position: static; }
+      .preview-panel { max-width: 670px; width: 100%; margin: 0 auto; }
+    }
+    @media (max-width: 600px) {
+      .app { width: min(100% - 20px, 1400px); }
+      .topbar { min-height: 75px; padding: 0 10px; }
+      .studio-seal { display: none; }
+      .brand-logo { width: 44px; height: 44px; }
+      .top-actions .button { padding: 7px 10px; font-size: 11px; }
+      .workspace { padding-top: 15px; }
+      .panel-head { height: 52px; padding: 0 14px; }
+      .panel-head h2 { font-size: 11px; }
+      .controls { padding: 15px; }
+      .field-grid { grid-template-columns: 1fr; gap: 12px; }
+      .field.full { grid-column: auto; }
+      .custom-color-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .hex-input-wrap { margin-left: 0; width: 100%; justify-content: space-between; }
+      .hex-input-wrap input { flex: 1; }
+      .preview-inner { padding: 14px 12px 10px; }
+      .card-head { min-height: 205px; padding: 18px; }
+      .merchant-full-logo { width: min(100%, 275px); height: 110px; }
+      .card-body { padding: 16px 18px 18px; }
+      #qrCanvas, #finalQrImage { width: min(100%, 214px); padding: 5px; }
+      .export-grid { grid-template-columns: 1fr 1fr; padding: 0; }
+      .export-grid .button.primary { grid-column: 1 / -1; }
+      .footer { padding-top: 4px; font-size: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-logo"><img src="phoenix-edit-point-logo.png" alt="Phoenix Edit Point logo" /></div>
+        <div>
+          <p class="kicker"><span>❖</span> Established Studio <span>❖</span></p>
+          <h1>PHOENIX EDIT POINT</h1>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span class="studio-seal"><i class="fa-solid fa-stamp"></i> ESTD. 2018 · VERIFIED</span>
+        <button class="button" type="button" onclick="loadSampleData()"><i class="fa-solid fa-rotate-right"></i>Reset</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <!-- Control Panel -->
+      <section class="panel" aria-label="Payment settings">
+        <div class="panel-head">
+          <h2><i class="fa-solid fa-feather-pointed"></i>STUDIO PAYMENT DESK</h2>
+          <span class="panel-badge">❖ OFFICIAL COUNTER</span>
+        </div>
+        <div class="controls">
+          <div class="identity">
+            <div class="identity-logo"><img src="phoenix-edit-point-logo.png" alt="Phoenix Edit Point logo" /></div>
+            <div class="identity-body">
+              <p class="identity-label">STUDIO MERCHANT IDENTITY</p>
+              <h3>Phoenix Edit Point</h3>
+              <p class="locked"><i class="fa-solid fa-certificate"></i>Authentic Photography &amp; Film Studio</p>
+            </div>
+          </div>
+
+          <div class="field-grid">
+            <div class="field full">
+              <label for="upiId">UPI ID (VPA) <span>REQUIRED</span></label>
+              <div class="input-wrap">
+                <i class="fa-solid fa-at"></i>
+                <input id="upiId" type="text" value="9348013917@nyes" placeholder="yourname@bank" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="amount">Amount <span>OPTIONAL</span></label>
+              <div class="input-wrap money">
+                <input id="amount" type="number" min="0" step="0.01" placeholder="0.00" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="note">Payment Note <span>OPTIONAL</span></label>
+              <div class="input-wrap">
+                <i class="fa-regular fa-message"></i>
+                <input id="note" type="text" placeholder="Project reel, order etc." maxlength="60" />
+              </div>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <div class="control-title">
+              <span><i class="fa-solid fa-bolt"></i>QUICK AMOUNT</span>
+              <button class="clear" type="button" onclick="setAmount('')">CLEAR</button>
+            </div>
+            <div class="quick-list" id="quickAmounts">
+              <button class="chip" type="button" data-value="500">₹500</button>
+              <button class="chip" type="button" data-value="1000">₹1,000</button>
+              <button class="chip" type="button" data-value="2000">₹2,000</button>
+              <button class="chip" type="button" data-value="3000">₹3,000</button>
+              <button class="chip" type="button" data-value="4000">₹4,000</button>
+              <button class="chip" type="button" data-value="5000">₹5,000</button>
+            </div>
+          </div>
+
+          <!-- Inline Minimize / Maximize Theme Accordion -->
+          <div class="theme-accordion" id="themeAccordion">
+            <button class="theme-menu-trigger" type="button" id="themeAccordionBtn" onclick="toggleThemeAccordion()" title="Click to minimize / maximize theme colors">
+              <div class="theme-menu-trigger-left">
+                <i class="fa-solid fa-palette"></i>
+                <span>Customize Colors &amp; Theme Menu</span>
+              </div>
+              <div class="theme-menu-dots">
+                <span class="theme-dot-preview" id="triggerBrassDot" title="Border Color" style="background-color: var(--brass);"></span>
+                <span class="theme-dot-preview" id="triggerGradeDot" title="Card Color" style="background-color: var(--grade);"></span>
+                <i class="fa-solid fa-chevron-right theme-menu-arrow" id="themeAccordionArrow"></i>
+              </div>
+            </button>
+
+            <div class="theme-accordion-body" id="themeAccordionBody">
+              <!-- 1. Gold / Border Trim Customizer -->
+              <div class="control-section">
+                <div class="control-title">
+                  <span><i class="fa-solid fa-crown"></i>GOLD / BORDER TRIM THEME</span>
+                  <span id="activeBrassCode" class="color-hex-badge">#C9A050</span>
+                </div>
+
+                <div class="brass-grid" id="brassGrets">
+                  <button class="brass-chip active" type="button" data-color="#c9a050" title="Antique Gold"><span></span><small>Gold</small></button>
+                  <button class="brass-chip" type="button" data-color="#c0c7d0" title="Platinum Silver"><span></span><small>Silver</small></button>
+                  <button class="brass-chip" type="button" data-color="#d4836a" title="Rose Gold"><span></span><small>Rose</small></button>
+                  <button class="brass-chip" type="button" data-color="#34d399" title="Emerald Gold"><span></span><small>Emerald</small></button>
+                  <button class="brass-chip" type="button" data-color="#38bdf8" title="Diamond Ice"><span></span><small>Ice Blue</small></button>
+                  <button class="brass-chip" type="button" data-color="#a37938" title="Vintage Bronze"><span></span><small>Bronze</small></button>
+                </div>
+
+                <div class="custom-color-row">
+                  <label class="custom-color-picker-label" for="customBrassPicker" title="Pick any border or gold color">
+                    <input type="color" id="customBrassPicker" value="#c9a050" />
+                    <span class="custom-color-preview" id="customBrassPreview" style="background-color: var(--brass);"></span>
+                    <span class="picker-text"><i class="fa-solid fa-eye-dropper"></i> Custom Gold/Border</span>
+                  </label>
+                  <div class="hex-input-wrap">
+                    <span>#</span>
+                    <input type="text" id="customBrassHexInput" value="C9A050" maxlength="6" placeholder="RRGGBB" title="Enter Hex Code" />
+                    <button class="hex-apply-btn" type="button" id="applyBrassHexBtn" title="Apply Border Color">Apply</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2. Card Header Theme Customizer -->
+              <div class="control-section">
+                <div class="control-title">
+                  <span><i class="fa-solid fa-film"></i>CARD HEADER THEME</span>
+                  <span id="activeColorCode" class="color-hex-badge">#8E1B21</span>
+                </div>
+
+                <div class="grade-list" id="grades">
+                  <button class="grade active" type="button" data-color="#8e1b21" data-rgb="142,27,33" aria-label="Technicolor Crimson" title="Technicolor Crimson"><span></span></button>
+                  <button class="grade" type="button" data-color="#701c36" data-rgb="112,28,54" aria-label="Royal Burgundy" title="Royal Burgundy"><span></span></button>
+                  <button class="grade" type="button" data-color="#185260" data-rgb="24,82,96" aria-label="Cinema Teal" title="Cinema Teal"><span></span></button>
+                  <button class="grade" type="button" data-color="#5c5520" data-rgb="92,85,32" aria-label="Heritage Olive" title="Heritage Olive"><span></span></button>
+                  <button class="grade" type="button" data-color="#4a154b" data-rgb="74,21,75" aria-label="Imperial Wine" title="Imperial Wine"><span></span></button>
+                  <button class="grade" type="button" data-color="#7a4216" data-rgb="122,66,22" aria-label="Antique Bronze" title="Antique Bronze"><span></span></button>
+                </div>
+
+                <div class="custom-color-row">
+                  <label class="custom-color-picker-label" for="customColorPicker" title="Click to open color picker">
+                    <input type="color" id="customColorPicker" value="#8e1b21" />
+                    <span class="custom-color-preview" id="customColorPreview"></span>
+                    <span class="picker-text"><i class="fa-solid fa-eye-dropper"></i> Custom Header Color</span>
+                  </label>
+                  <div class="hex-input-wrap">
+                    <span>#</span>
+                    <input type="text" id="customHexInput" value="8E1B21" maxlength="6" placeholder="RRGGBB" title="Enter Hex Code" />
+                    <button class="hex-apply-btn" type="button" id="applyHexBtn" title="Apply Hex Color">Apply</button>
+                  </div>
+                </div>
+
+                <button class="sync-theme-btn" type="button" id="syncThemeBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Match Gold / Borders With Header Theme</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons: Download Slate, QR PNG, Share -->
+          <div class="export-grid">
+            <button class="button primary" type="button" onclick="downloadPoster()"><i class="fa-solid fa-file-arrow-down"></i>Download slate</button>
+            <button class="button" type="button" onclick="downloadQrOnly()"><i class="fa-solid fa-qrcode"></i>QR PNG</button>
+            <button class="button" type="button" onclick="sharePayment()"><i class="fa-solid fa-share-nodes"></i>Share</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Preview -->
+      <section class="panel preview-column" id="previewPanel" aria-label="Live payment QR preview">
+        <div class="panel-head preview-panel-trigger" id="previewPanelHead" onclick="togglePreviewPanel()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togglePreviewPanel();}" role="button" tabindex="0" title="Click to minimize / maximize Live Preview">
+          <h2><i class="fa-solid fa-film"></i>PAYMENT POSTER SLATE</h2>
+          <div class="preview-head-right">
+            <span class="preview-meta" id="previewMetaStatus"><i class="fa-solid fa-circle"></i> INSTANT PREVIEW</span>
+            <span class="preview-toggle-chip" id="previewToggleChip">
+              <span id="previewToggleActionText">HIDE</span>
+              <i class="fa-solid fa-chevron-up preview-toggle-arrow" id="previewToggleArrow"></i>
+            </span>
+          </div>
+        </div>
+        <div class="preview-inner" id="previewInner">
+          <article id="paymentCard">
+            <header class="card-head">
+              <div class="card-head-content">
+                <span class="secure"><i class="fa-solid fa-shield-halved"></i> SECURE UPI TRANSFER</span>
+                <div class="merchant">
+                  <div class="merchant-logo"><img id="cardMerchantSmallLogo" src="phoenix-edit-point-logo.png" alt="Phoenix Edit Point logo" /></div>
+                  <h3 id="cardShopName" style="display:none;">Phoenix Edit Point</h3>
+                  <img class="merchant-full-logo" id="cardMerchantFullLogo" src="PhoenixLOGO-full-v2.png" alt="Phoenix Edit Point logo" />
+                  <span class="merchant-badge"><i class="fa-solid fa-certificate"></i> VERIFIED STUDIO MERCHANT</span>
+                </div>
+              </div>
+            </header>
+            <div class="card-body">
+              <div class="meter">
+                <span>ACCEPTED VIA ANY UPI APP</span>
+                <span class="grade-dot">❖ OFFICIAL DESK</span>
+              </div>
+              <div id="amountDisplay" class="amount any">ANY AMOUNT</div>
+              <p id="cardNote">Scan and enter the amount in your UPI app</p>
+
+              <div class="qr-zone">
+                <canvas id="qrCanvas" width="500" height="500"></canvas>
+                <img id="finalQrImage" alt="Phoenix Edit Point UPI QR code" style="display:none;" />
+              </div>
+
+              <div class="qr-signature">
+                <img id="cardQrSignatureLogo" src="phoenix-edit-point-logo.png" alt="Phoenix Edit Point logo" />
+                <div class="qr-signature-copy">
+                  <small>OFFICIAL STUDIO PAYMENT PORTAL</small>
+                  <strong>PHOENIX EDIT POINT</strong>
+                </div>
+              </div>
+
+              <div class="upi-bar">
+                <div class="upi-copy">
+                  <span class="upi-label">UPI VIRTUAL PAYMENT ADDRESS</span>
+                  <strong id="cardUpiDisplay">9348013917@nyes</strong>
+                </div>
+                <button class="copy" type="button" title="Copy UPI ID" onclick="copyUpiId()"><i class="fa-regular fa-copy"></i></button>
+              </div>
+
+              <div class="supported-apps">
+                <span><i class="fa-brands fa-google-pay"></i> GPay</span>
+                <span>❖</span>
+                <span><i class="fa-solid fa-mobile-screen"></i> PhonePe</span>
+                <span>❖</span>
+                <span><i class="fa-solid fa-wallet"></i> Paytm</span>
+                <span>❖</span>
+                <span><i class="fa-solid fa-building-columns"></i> BHIM</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">PHOENIX EDIT POINT · DETAILS REMAIN SECURE IN BROWSER</footer>
+  </div>
+
+  <div id="toast" role="status"><i class="fa-solid fa-certificate"></i><span id="toastText">Ready</span></div>
+
+  <script>
+    const MERCHANT_NAME = 'Phoenix Edit Point';
+    const LOGO_SOURCE = typeof PHOENIX_LOGO_DATA !== 'undefined' ? PHOENIX_LOGO_DATA : 'phoenix-edit-point-logo.png';
+    const FULL_LOGO_SOURCE = typeof PHOENIX_FULL_LOGO_DATA !== 'undefined' ? PHOENIX_FULL_LOGO_DATA : 'PhoenixLOGO-full-v2.png';
+    const state = {
+      color: '#8e1b21',
+      brass: '#c9a050',
+      logo: null,
+      fullLogo: null,
+      toastTimer: null
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    // Event listeners for inputs
+    ['upiId', 'amount', 'note'].forEach((id) => {
+      const el = $(id);
+      if (el) el.addEventListener('input', updateQR);
+    });
+
+    document.querySelectorAll('#quickAmounts .chip').forEach((chip) => {
+      chip.addEventListener('click', () => setAmount(chip.dataset.value));
+    });
+
+    // Card Header Presets
+    document.querySelectorAll('#grades .grade').forEach((grade) => {
+      grade.addEventListener('click', () => setGrade(grade));
+    });
+
+    // Gold / Border Trim Presets
+    document.querySelectorAll('#brassGrets .brass-chip').forEach((chip) => {
+      chip.addEventListener('click', () => applyBrassColor(chip.dataset.color, true));
+    });
+
+    // Card Header Custom Color Listeners
+    const colorPicker = $('customColorPicker');
+    if (colorPicker) {
+      colorPicker.addEventListener('input', (e) => applyCustomColor(e.target.value, false));
+      colorPicker.addEventListener('change', (e) => applyCustomColor(e.target.value, true));
+    }
+
+    const hexInput = $('customHexInput');
+    const applyHexBtn = $('applyHexBtn');
+    if (applyHexBtn && hexInput) {
+      applyHexBtn.addEventListener('click', () => applyCustomColor(hexInput.value.trim(), true));
+      hexInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          applyCustomColor(hexInput.value.trim(), true);
+        }
+      });
+    }
+
+    // Gold / Border Trim Custom Color Listeners
+    const brassPicker = $('customBrassPicker');
+    if (brassPicker) {
+      brassPicker.addEventListener('input', (e) => applyBrassColor(e.target.value, false));
+      brassPicker.addEventListener('change', (e) => applyBrassColor(e.target.value, true));
+    }
+
+    const brassHexInput = $('customBrassHexInput');
+    const applyBrassHexBtn = $('applyBrassHexBtn');
+    if (applyBrassHexBtn && brassHexInput) {
+      applyBrassHexBtn.addEventListener('click', () => applyBrassColor(brassHexInput.value.trim(), true));
+      brassHexInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          applyBrassColor(brassHexInput.value.trim(), true);
+        }
+      });
+    }
+
+    // Sync button: Match Gold / Borders with current Card Theme
+    const syncThemeBtn = $('syncThemeBtn');
+    if (syncThemeBtn) {
+      syncThemeBtn.addEventListener('click', () => {
+        applyBrassColor(state.color, true);
+        showToast('Border theme matched with header');
+      });
+    }
+
+    // Inline Accordion Toggle (Minimize / Maximize right on the bar!)
+    function toggleThemeAccordion() {
+      const accordion = $('themeAccordion');
+      if (accordion) {
+        accordion.classList.toggle('expanded');
+      }
+    }
+
+    // Live Preview Panel Toggle (Minimize / Maximize / Hide)
+    function togglePreviewPanel() {
+      const panel = $('previewPanel');
+      if (!panel) return;
+      const isCollapsed = panel.classList.toggle('collapsed');
+      const actionText = $('previewToggleActionText');
+      const statusText = $('previewMetaStatus');
+
+      if (actionText) {
+        actionText.textContent = isCollapsed ? 'SHOW' : 'HIDE';
+      }
+      if (statusText) {
+        statusText.innerHTML = isCollapsed
+          ? '<i class="fa-solid fa-circle" style="color: #8c7d6b;"></i> MINIMIZED'
+          : '<i class="fa-solid fa-circle" style="color: #34d399;"></i> INSTANT PREVIEW';
+      }
+
+      showToast(isCollapsed ? 'Live preview hidden' : 'Live preview visible');
+    }
+
+    function values() {
+      const upi = ($('upiId').value || '').trim();
+      const rawAmount = ($('amount').value || '').trim();
+      const amount = Number.parseFloat(rawAmount);
+      return {
+        upi: upi,
+        amount: Number.isFinite(amount) && amount > 0 ? amount : null,
+        note: ($('note').value || '').trim()
+      };
+    }
+
+    // NPCI standard UPI URI (Literal '@' preserved so GPay/PhonePe/Paytm never reject the VPA)
+    function uri(data) {
+      const safeId = data.upi || '9348013917@nyes';
+      let value = `upi://pay?pa=${safeId}&pn=${encodeURIComponent(MERCHANT_NAME)}&cu=INR`;
+      if (data.amount) value += `&am=${data.amount.toFixed(2)}`;
+      if (data.note) value += `&tn=${encodeURIComponent(data.note)}`;
+      return value;
+    }
+
+    function setAmount(value) {
+      $('amount').value = value;
+      document.querySelectorAll('#quickAmounts .chip').forEach((chip) => {
+        chip.classList.toggle('active', chip.dataset.value === String(value));
+      });
+      updateQR();
+    }
+
+    // Convert hex string (#RGB or #RRGGBB) to { r, g, b }
+    function hexToRgb(hex) {
+      let clean = hex.replace('#', '').trim();
+      if (clean.length === 3) {
+        clean = clean.split('').map(c => c + c).join('');
+      }
+      if (clean.length !== 6) return null;
+      const num = parseInt(clean, 16);
+      if (isNaN(num)) return null;
+      return {
+        r: (num >> 16) & 255,
+        g: (num >> 8) & 255,
+        b: num & 255
+      };
+    }
+
+    // 1. Apply Gold & Border Trim Color
+    function applyBrassColor(hex, notify = true) {
+      if (!hex.startsWith('#')) hex = '#' + hex;
+      const rgb = hexToRgb(hex);
+      if (!rgb) {
+        if (notify) showToast('Invalid Hex Code', 'error');
+        return false;
+      }
+
+      // Compute light highlight variant
+      const lightR = Math.min(255, Math.round(rgb.r + (255 - rgb.r) * 0.40));
+      const lightG = Math.min(255, Math.round(rgb.g + (255 - rgb.g) * 0.40));
+      const lightB = Math.min(255, Math.round(rgb.b + (255 - rgb.b) * 0.40));
+      const lightHex = `#${lightR.toString(16).padStart(2,'0')}${lightG.toString(16).padStart(2,'0')}${lightB.toString(16).padStart(2,'0')}`;
+
+      // Compute dark variant
+      const darkR = Math.round(rgb.r * 0.58);
+      const darkG = Math.round(rgb.g * 0.58);
+      const darkB = Math.round(rgb.b * 0.58);
+      const darkHex = `#${darkR.toString(16).padStart(2,'0')}${darkG.toString(16).padStart(2,'0')}${darkB.toString(16).padStart(2,'0')}`;
+
+      state.brass = hex;
+      const root = document.documentElement;
+      root.style.setProperty('--brass', hex);
+      root.style.setProperty('--brass-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`);
+      root.style.setProperty('--brass-light', lightHex);
+      root.style.setProperty('--brass-dark', darkHex);
+      root.style.setProperty('--brass-glow', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.28)`);
+      root.style.setProperty('--wood-border', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.26)`);
+      root.style.setProperty('--wood-border-bright', `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.55)`);
+
+      // Sync inputs & preview in accordion and trigger button
+      if ($('customBrassPicker')) $('customBrassPicker').value = hex;
+      if ($('customBrassHexInput')) $('customBrassHexInput').value = hex.replace('#', '').toUpperCase();
+      if ($('customBrassPreview')) $('customBrassPreview').style.backgroundColor = hex;
+      if ($('activeBrassCode')) $('activeBrassCode').textContent = hex.toUpperCase();
+      if ($('triggerBrassDot')) $('triggerBrassDot').style.backgroundColor = hex;
+
+      // Highlight active preset chip
+      document.querySelectorAll('#brassGrets .brass-chip').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.color && btn.dataset.color.toLowerCase() === hex.toLowerCase());
+      });
+
+      try {
+        localStorage.setItem('phoenix_brass_color', hex);
+      } catch (e) {}
+
+      updateQR();
+      if (notify) showToast('Border & Gold: ' + hex.toUpperCase());
+      return true;
+    }
+
+    // 2. Apply Card Header / Slate Theme Color
+    function applyCustomColor(hex, notify = true) {
+      if (!hex.startsWith('#')) hex = '#' + hex;
+      const rgb = hexToRgb(hex);
+      if (!rgb) {
+        if (notify) showToast('Invalid Hex Code', 'error');
+        return false;
+      }
+
+      const rgbStr = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+      const darkRgbStr = `${Math.round(rgb.r * 0.42)}, ${Math.round(rgb.g * 0.42)}, ${Math.round(rgb.b * 0.42)}`;
+
+      state.color = hex;
+      const root = document.documentElement;
+      root.style.setProperty('--grade', hex);
+      root.style.setProperty('--grade-rgb', rgbStr);
+      root.style.setProperty('--grade-dark-rgb', darkRgbStr);
+
+      // Sync color picker, hex input, preview dot, and active badge
+      if ($('customColorPicker')) $('customColorPicker').value = hex;
+      if ($('customHexInput')) $('customHexInput').value = hex.replace('#', '').toUpperCase();
+      if ($('customColorPreview')) $('customColorPreview').style.backgroundColor = hex;
+      if ($('activeColorCode')) $('activeColorCode').textContent = hex.toUpperCase();
+      if ($('triggerGradeDot')) $('triggerGradeDot').style.backgroundColor = hex;
+
+      // Update active highlight on matching presets
+      document.querySelectorAll('#grades .grade').forEach((btn) => {
+        btn.classList.toggle('active', btn.dataset.color && btn.dataset.color.toLowerCase() === hex.toLowerCase());
+      });
+
+      try {
+        localStorage.setItem('phoenix_theme_color', hex);
+      } catch (e) {}
+
+      updateQR();
+      if (notify) showToast('Header Theme: ' + hex.toUpperCase());
+      return true;
+    }
+
+    function setGrade(button) {
+      applyCustomColor(button.dataset.color, true);
+    }
+
+    // Fast, local, reliable QR drawing onto canvas using Reed-Solomon Error Correction Level H (30%)
+    // Renders the Phoenix logo as a rich, clearly visible background watermark with boosted contrast & saturation
+    function renderQrMatrix(canvas, content) {
+      if (typeof qrcode !== 'function') {
+        throw new Error('QR engine not ready');
+      }
+      const qr = qrcode(0, 'H');
+      qr.addData(content);
+      qr.make();
+
+      const count = qr.getModuleCount();
+      const margin = 2;
+      const total = count + margin * 2;
+      const cellSize = canvas.width / total;
+      const ctx = canvas.getContext('2d');
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 1. Pure white base background
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. Phoenix Logo Watermark in the background at boosted 50% opacity & vibrant saturation
+      if (state.logo && state.logo.complete && state.logo.naturalWidth) {
+        ctx.save();
+        ctx.globalAlpha = 0.50; // Rich, clearly visible watermark (50% opacity as requested)
+        ctx.filter = 'contrast(1.20) saturate(1.30)'; // Enhances reds, oranges, and golds
+        const img = state.logo;
+        const cropX = img.naturalWidth * 0.22;
+        const cropY = img.naturalHeight * 0.12;
+        const cropW = img.naturalWidth * 0.56;
+        const cropH = img.naturalHeight * 0.78;
+
+        // Scale and center watermark nicely inside QR area (~80% of canvas)
+        const wmSize = Math.round(canvas.width * 0.80);
+        const wmX = Math.round((canvas.width - wmSize) / 2);
+        const wmY = Math.round((canvas.height - wmSize) / 2);
+
+        ctx.drawImage(img, cropX, cropY, cropW, cropH, wmX, wmY, wmSize, wmSize);
+        ctx.restore();
+      }
+
+      // 3. Keep the 3 corner Finder Patterns backed with clean white for 100% error-free camera detection
+      ctx.fillStyle = '#ffffff';
+      const finderArea = 8 * cellSize;
+      // Top-Left Finder
+      ctx.fillRect(Math.round((margin - 0.5) * cellSize), Math.round((margin - 0.5) * cellSize), Math.ceil(finderArea), Math.ceil(finderArea));
+      // Top-Right Finder
+      ctx.fillRect(Math.round((count - 7 + margin - 0.5) * cellSize), Math.round((margin - 0.5) * cellSize), Math.ceil(finderArea), Math.ceil(finderArea));
+      // Bottom-Left Finder
+      ctx.fillRect(Math.round((margin - 0.5) * cellSize), Math.round((count - 7 + margin - 0.5) * cellSize), Math.ceil(finderArea), Math.ceil(finderArea));
+
+      // 4. Dark QR Modules drawn solid on top (100% opaque, maximum scan contrast)
+      ctx.fillStyle = '#100e0d';
+      for (let r = 0; r < count; r++) {
+        for (let c = 0; c < count; c++) {
+          if (qr.isDark(r, c)) {
+            const x = Math.round((c + margin) * cellSize);
+            const y = Math.round((r + margin) * cellSize);
+            const w = Math.ceil(cellSize);
+            const h = Math.ceil(cellSize);
+            ctx.fillRect(x, y, w, h);
+          }
+        }
+      }
+    }
+
+    function drawUnavailable(canvas) {
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, 500, 500);
+      ctx.fillStyle = '#100e0d';
+      ctx.fillRect(35, 35, 430, 430);
+      ctx.fillStyle = state.brass;
+      ctx.font = '700 24px Cinzel, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('RENDERING QR…', 250, 240);
+      ctx.fillStyle = '#f9f5eb';
+      ctx.font = '16px Marcellus, serif';
+      ctx.fillText('Please wait a moment', 250, 275);
+    }
+
+    async function updateQR() {
+      const data = values();
+      $('cardShopName').textContent = MERCHANT_NAME;
+      $('cardUpiDisplay').textContent = data.upi || 'Enter your UPI ID';
+      $('amountDisplay').classList.toggle('any', !data.amount);
+      $('amountDisplay').innerHTML = data.amount ? `<sup>₹</sup>${data.amount.toFixed(2)}` : 'ANY AMOUNT';
+      $('cardNote').textContent = data.note ? `“${data.note}”` : 'Scan and enter the amount in your UPI app';
+
+      const canvas = $('qrCanvas');
+      const img = $('finalQrImage');
+
+      try {
+        renderQrMatrix(canvas, uri(data));
+      } catch (err) {
+        drawUnavailable(canvas);
+        console.warn('QR render error:', err);
+      }
+
+      // Sync canvas with image element safely
+      try {
+        const dataUrl = canvas.toDataURL('image/png');
+        img.src = dataUrl;
+        img.style.display = 'block';
+        canvas.style.display = 'none';
+      } catch (e) {
+        // Fallback: If toDataURL throws under restricted file:// origins, show canvas directly so QR is NEVER broken
+        canvas.style.display = 'block';
+        img.style.display = 'none';
+      }
+    }
+
+    function filename(suffix) {
+      return `Phoenix_Edit_Point_${suffix}.png`;
+    }
+
+    function downloadQrOnly() {
+      try {
+        const canvas = $('qrCanvas');
+        const link = document.createElement('a');
+        link.download = filename('QR');
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showToast('QR PNG downloaded');
+      } catch (e) {
+        showToast('Could not download QR', 'error');
+      }
+    }
+
+    async function createSlateCanvas() {
+      const posterEl = $('paymentCard');
+
+      // Ensure all images inside posterEl have data URIs so html2canvas never taints
+      if (typeof PHOENIX_FULL_LOGO_DATA !== 'undefined' && $('cardMerchantFullLogo')) {
+        $('cardMerchantFullLogo').src = PHOENIX_FULL_LOGO_DATA;
+      }
+      if (typeof PHOENIX_LOGO_DATA !== 'undefined') {
+        if ($('cardMerchantSmallLogo')) $('cardMerchantSmallLogo').src = PHOENIX_LOGO_DATA;
+        if ($('cardQrSignatureLogo')) $('cardQrSignatureLogo').src = PHOENIX_LOGO_DATA;
+      }
+
+      // Synchronize QR image with the latest high-res canvas
+      const canvas = $('qrCanvas');
+      const img = $('finalQrImage');
+      if (canvas && img) {
+        try {
+          img.src = canvas.toDataURL('image/png');
+          img.style.display = 'block';
+          canvas.style.display = 'none';
+        } catch (e) {}
+      }
+
+      if (document.fonts && document.fonts.ready) {
+        await document.fonts.ready;
+      }
+
+      await new Promise((resolve) => setTimeout(resolve, 80));
+
+      if (window.html2canvas) {
+        try {
+          const cvs = await window.html2canvas(posterEl, {
+            scale: 2,
+            useCORS: true,
+            allowTaint: false,
+            backgroundColor: '#13100e',
+            logging: false,
+            scrollX: 0,
+            scrollY: 0,
+            onclone: (clonedDoc) => {
+              const clonedPanel = clonedDoc.getElementById('previewPanel');
+              if (clonedPanel) clonedPanel.classList.remove('collapsed');
+              const clonedInner = clonedDoc.getElementById('previewInner');
+              if (clonedInner) {
+                clonedInner.style.maxHeight = 'none';
+                clonedInner.style.opacity = '1';
+                clonedInner.style.overflow = 'visible';
+                clonedInner.style.padding = '22px 22px 16px';
+              }
+              const card = clonedDoc.getElementById('paymentCard');
+              if (card) {
+                card.style.margin = '0 auto';
+                card.style.transform = 'none';
+              }
+            }
+          });
+          if (cvs && cvs.width > 0) return cvs;
+        } catch (e) {
+          console.warn('html2canvas canvas generation error, using direct canvas:', e);
+        }
+      }
+      return createDirectSlateCanvas();
+    }
+
+    function createDirectSlateCanvas() {
+      const data = values();
+      const W = 1000;
+      const H = 1450;
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      function roundRect(x, y, w, h, r, fill, stroke, strokeColor, lineWidth) {
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + w, y, x + w, y + h, r);
+        ctx.arcTo(x + w, y + h, x, y + h, r);
+        ctx.arcTo(x, y + h, x, y, r);
+        ctx.arcTo(x, y + w, y, r);
+        ctx.closePath();
+        if (fill) {
+          ctx.fillStyle = fill;
+          ctx.fill();
+        }
+        if (stroke) {
+          ctx.lineWidth = lineWidth || 1;
+          ctx.strokeStyle = strokeColor || state.brass;
+          ctx.stroke();
+        }
+      }
+
+      // 1. Base card container background
+      roundRect(0, 0, W, H, 16, '#14110f', true, state.brass, 4);
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(16, 0);
+      ctx.arcTo(W, 0, W, H, 16);
+      ctx.arcTo(W, H, 0, H, 16);
+      ctx.arcTo(0, H, 0, 0, 16);
+      ctx.arcTo(0, 0, W, 0, 16);
+      ctx.closePath();
+      ctx.clip();
+
+      // 2. Header section
+      const headH = 340;
+      const grad = ctx.createLinearGradient(0, 0, W, headH);
+      const rgb = hexToRgb(state.color) || { r: 142, g: 27, b: 33 };
+      grad.addColorStop(0, `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`);
+      grad.addColorStop(0.55, `rgb(${Math.round(rgb.r * 0.45)}, ${Math.round(rgb.g * 0.45)}, ${Math.round(rgb.b * 0.45)})`);
+      grad.addColorStop(1, '#140e0c');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, headH);
+
+      // Header bottom divider
+      ctx.fillStyle = state.brass;
+      ctx.fillRect(0, headH - 3, W, 3);
+
+      // Secure badge: SECURE UPI TRANSFER
+      roundRect(W / 2 - 140, 24, 280, 36, 6, 'rgba(6, 40, 24, 0.85)', true, 'rgba(52, 211, 153, 0.6)', 1.5);
+      ctx.fillStyle = '#34d399';
+      ctx.font = '700 14px Cinzel, serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('🛡  SECURE UPI TRANSFER', W / 2, 42);
+
+      // Main Phoenix Full Wordmark Logo
+      if (state.fullLogo && state.fullLogo.complete && state.fullLogo.naturalWidth) {
+        const lW = 560;
+        const lH = 190;
+        ctx.drawImage(state.fullLogo, W / 2 - lW / 2, 70, lW, lH);
+      } else {
+        ctx.fillStyle = '#fff9ed';
+        ctx.font = '800 48px Cinzel, serif';
+        ctx.fillText('PHOENIX EDIT POINT', W / 2, 160);
+      }
+
+      // Verified Merchant Badge
+      ctx.fillStyle = '#34d399';
+      ctx.font = '700 16px Cinzel, serif';
+      ctx.fillText('★  VERIFIED STUDIO MERCHANT', W / 2, 290);
+
+      // 3. Body Section
+      const bodyTop = headH + 20;
+
+      // Meter
+      ctx.fillStyle = '#cfc2a5';
+      ctx.font = '700 15px Cinzel, serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('ACCEPTED VIA ANY UPI APP', 50, bodyTop + 10);
+      ctx.fillStyle = '#34d399';
+      ctx.textAlign = 'right';
+      ctx.fillText('❖ OFFICIAL DESK', W - 50, bodyTop + 10);
+
+      // Separator
+      ctx.fillStyle = 'rgba(201, 160, 80, 0.26)';
+      ctx.fillRect(50, bodyTop + 24, W - 100, 1);
+
+      // Amount Display
+      ctx.textAlign = 'center';
+      if (data.amount) {
+        ctx.fillStyle = '#fff9ed';
+        ctx.font = '800 58px Playfair Display, serif';
+        ctx.fillText(`₹ ${data.amount.toFixed(2)}`, W / 2, bodyTop + 85);
+      } else {
+        ctx.fillStyle = '#f5df97';
+        ctx.font = '700 36px Cinzel, serif';
+        ctx.fillText('ANY AMOUNT', W / 2, bodyTop + 75);
+      }
+
+      // Note
+      ctx.fillStyle = '#c0b39c';
+      ctx.font = 'italic 19px Playfair Display, serif';
+      const noteText = data.note ? `“${data.note}”` : 'Scan and enter the amount in your UPI app';
+      ctx.fillText(noteText, W / 2, bodyTop + 125);
+
+      // 4. Gold-Framed QR Box
+      const qrBoxSize = 540;
+      const qrBoxX = W / 2 - qrBoxSize / 2;
+      const qrBoxY = bodyTop + 155;
+      roundRect(qrBoxX, qrBoxY, qrBoxSize, qrBoxSize, 12, 'rgba(24, 18, 14, 0.95)', true, state.brass, 3);
+
+      const qrSrcCanvas = $('qrCanvas');
+      if (qrSrcCanvas) {
+        const qrInnerSize = qrBoxSize - 36;
+        roundRect(qrBoxX + 18, qrBoxY + 18, qrInnerSize, qrInnerSize, 8, '#ffffff', false);
+        ctx.drawImage(qrSrcCanvas, qrBoxX + 18, qrBoxY + 18, qrInnerSize, qrInnerSize);
+      }
+
+      // 5. Signature Ribbon
+      const sigY = qrBoxY + qrBoxSize + 22;
+      roundRect(50, sigY, W - 100, 68, 8, 'rgba(28, 22, 18, 0.9)', true, state.brass, 1.5);
+      ctx.fillStyle = state.brass;
+      ctx.fillRect(50, sigY, 6, 68);
+
+      if (state.logo && state.logo.complete) {
+        ctx.drawImage(state.logo, 70, sigY + 9, 50, 50);
+      }
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#f5df97';
+      ctx.font = '700 13px Cinzel, serif';
+      ctx.fillText('OFFICIAL STUDIO PAYMENT PORTAL', 135, sigY + 28);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 20px Cinzel, serif';
+      ctx.fillText('PHOENIX EDIT POINT', 135, sigY + 54);
+
+      // 6. UPI Virtual Payment Address Bar
+      const upiY = sigY + 88;
+      roundRect(50, upiY, W - 100, 68, 8, '#0e0b0a', true, 'rgba(201, 160, 80, 0.35)', 1.5);
+      ctx.fillStyle = '#cfc2a5';
+      ctx.font = '700 12px Cinzel, serif';
+      ctx.fillText('UPI VIRTUAL PAYMENT ADDRESS', 70, upiY + 26);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '700 22px Courier Prime, monospace';
+      ctx.fillText(data.upi || '9348013917@nyes', 70, upiY + 52);
+
+      // 7. Supported Apps Footer
+      const footY = upiY + 95;
+      ctx.fillStyle = 'rgba(201, 160, 80, 0.2)';
+      ctx.fillRect(50, footY - 14, W - 100, 1);
+      ctx.fillStyle = '#cfc2a5';
+      ctx.font = '700 15px Cinzel, serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('GPAY   ❖   PHONEPE   ❖   PAYTM   ❖   BHIM', W / 2, footY + 12);
+
+      ctx.restore();
+      return canvas;
+    }
+
+    async function downloadPoster() {
+      showToast('Rendering studio slate…');
+      try {
+        const canvas = await createSlateCanvas();
+        const link = document.createElement('a');
+        link.download = filename('Studio_Slate');
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast('Slate downloaded successfully!');
+      } catch (err) {
+        console.error('Download error:', err);
+        showToast('Could not download slate image', 'error');
+      }
+    }
+
+    async function copyUpiId() {
+      const text = $('upiId').value.trim();
+      if (!text) {
+        showToast('Enter a UPI ID first', 'error');
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch (error) {
+        const node = document.createElement('textarea');
+        node.value = text;
+        document.body.appendChild(node);
+        node.select();
+        document.execCommand('copy');
+        node.remove();
+      }
+      showToast('UPI ID copied');
+    }
+
+    async function sharePayment() {
+      const data = values();
+      const studioName = 'Phoenix Edit Point';
+      const ownerName = 'Jyoti Prakash Mohapatra';
+      const upiId = (data.upi && data.upi.trim()) ? data.upi.trim() : '9348013917@nyes';
+      
+      let amountStr = 'Any Amount';
+      if (data.amount && Number(data.amount) > 0) {
+        amountStr = '₹' + Number(data.amount).toLocaleString('en-IN', { minimumFractionDigits: Number.isInteger(data.amount) ? 0 : 2 });
+      }
+      const noteLine = (data.note && data.note.trim()) ? `\n❖ Note: ${data.note.trim()}` : '';
+
+      // Exact caption requested by user (photo with Add a message text)
+      const shareText = `❖ Studio: ${studioName}\n❖ Name: ${ownerName}\n❖ UPI ID: ${upiId}\n❖ Amount: ${amountStr}${noteLine}\n\nScan the attached QR photo or pay directly via UPI.`;
+
+      showToast('Preparing photo & message…');
+
+      // Pre-copy caption text to clipboard as seamless backup
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(shareText);
+        }
+      } catch (clipPreErr) {}
+
+      let canvas = null;
+      try {
+        canvas = await createSlateCanvas();
+      } catch (e) {
+        canvas = createDirectSlateCanvas();
+      }
+
+      // 1. Try sharing Photo File + Caption text via Web Share API
+      if (canvas && navigator.share) {
+        try {
+          const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+          if (blob) {
+            const file = new File([blob], filename('Studio_Slate'), { type: 'image/png' });
+
+            // In WhatsApp / mobile apps, passing text with file populates the "Add a message..." field
+            const payloadWithTextAndFile = {
+              text: shareText,
+              files: [file]
+            };
+
+            const canShareFiles = navigator.canShare ? navigator.canShare({ files: [file] }) : true;
+            if (canShareFiles) {
+              await navigator.share(payloadWithTextAndFile);
+              showToast('Photo & message shared in 1 bubble!');
+              return;
+            }
+          }
+        } catch (shareErr) {
+          if (shareErr.name === 'AbortError') return; // User closed share window
+          console.warn('File share not supported by target:', shareErr);
+        }
+      }
+
+      // 2. Desktop Fallback:
+      // Download the photo & copy caption to clipboard so user pastes into "Add a message..." field to send as a single bubble!
+      try {
+        if (canvas) {
+          const link = document.createElement('a');
+          link.download = filename('Studio_Slate');
+          link.href = canvas.toDataURL('image/png');
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        }
+
+        await navigator.clipboard.writeText(shareText);
+        showToast('Photo ready! "Add a message" me Paste (Ctrl+V) karein');
+      } catch (clipErr) {
+        copyUpiId();
+      }
+    }
+
+    function loadSampleData() {
+      $('upiId').value = '9348013917@nyes';
+      $('amount').value = '';
+      $('note').value = '';
+      setAmount('');
+      applyBrassColor('#c9a050', false);
+      applyCustomColor('#8e1b21', false);
+      showToast('Studio desk reset');
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = $('toast');
+      $('toastText').textContent = message;
+      const icon = toast.querySelector('i');
+      icon.className = type === 'error' ? 'fa-solid fa-triangle-exclamation' : 'fa-solid fa-certificate';
+      icon.style.color = type === 'error' ? '#ff8585' : 'var(--brass-light)';
+      clearTimeout(state.toastTimer);
+      toast.classList.add('show');
+      state.toastTimer = setTimeout(() => toast.classList.remove('show'), 2700);
+    }
+
+    // Initialize once DOM is ready
+    window.addEventListener('DOMContentLoaded', () => {
+      // Restore saved colors or use defaults
+      try {
+        const savedBrass = localStorage.getItem('phoenix_brass_color');
+        if (savedBrass) applyBrassColor(savedBrass, false);
+        else applyBrassColor('#c9a050', false);
+      } catch (e) {
+        applyBrassColor('#c9a050', false);
+      }
+
+      try {
+        const savedColor = localStorage.getItem('phoenix_theme_color');
+        if (savedColor) applyCustomColor(savedColor, false);
+        else applyCustomColor('#8e1b21', false);
+      } catch (e) {
+        applyCustomColor('#8e1b21', false);
+      }
+
+      // Apply Base64 Data URIs to card images immediately to eliminate any file:// CORS taint
+      if ($('cardMerchantSmallLogo')) $('cardMerchantSmallLogo').src = LOGO_SOURCE;
+      if ($('cardMerchantFullLogo')) $('cardMerchantFullLogo').src = FULL_LOGO_SOURCE;
+      if ($('cardQrSignatureLogo')) $('cardQrSignatureLogo').src = LOGO_SOURCE;
+
+      // First update immediately so QR shows instantly
+      updateQR();
+
+      // Load watermark logo for QR background
+      const logo = new Image();
+      logo.onload = () => {
+        state.logo = logo;
+        updateQR();
+      };
+      logo.src = LOGO_SOURCE;
+      if (logo.complete) {
+        state.logo = logo;
+        updateQR();
+      }
+
+      // Preload full logo
+      const fullLogo = new Image();
+      fullLogo.onload = () => {
+        state.fullLogo = fullLogo;
+      };
+      fullLogo.src = FULL_LOGO_SOURCE;
+      if (fullLogo.complete) {
+        state.fullLogo = fullLogo;
+      }
+    });
+  </script>
+</body>
+</html>

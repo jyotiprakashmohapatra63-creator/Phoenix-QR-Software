@@ -1,0 +1,16 @@
+{
+  "name": "Phoenix Edit Point — Payment Slate",
+  "short_name": "Phoenix QR",
+  "description": "Phoenix Edit Point Studio Payment & Slate Generator",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#120f0d",
+  "theme_color": "#120f0d",
+  "icons": [
+    {
+      "src": "phoenix-edit-point-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
