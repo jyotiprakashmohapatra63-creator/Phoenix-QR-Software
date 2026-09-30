@@ -1,0 +1,8 @@
+node_modules/
+release/
+android/
+.gradle/
+build/*.ico
+!build/README.md
+assets/*.png
+!assets/README.md
