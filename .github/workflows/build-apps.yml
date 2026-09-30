@@ -1,0 +1,57 @@
+name: Build Phoenix QR Apps
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-exe:
+    name: Windows EXE
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm install --no-audit --no-fund
+      - run: npm run desktop:build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Phoenix-QR-Windows-EXE
+          path: release/*.exe
+
+  android-apk:
+    name: Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - run: npm install --no-audit --no-fund
+
+      - run: |
+          npx cap add android
+          npx cap sync android
+
+      - working-directory: android
+        run: ./gradlew assembleDebug
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Phoenix-QR-Android-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
