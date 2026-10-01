@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell } = require('electron');
+const { app, BrowserWindow, shell, ipcMain, clipboard, nativeImage } = require('electron');
 const path = require('path');
 
 // Once GitHub Pages is enabled on Phoenix-QR-Update, packaged desktop apps
@@ -15,9 +15,10 @@ function createWindow() {
     autoHideMenuBar: true,
     title: 'Phoenix Edit Point — Payment Slate',
     webPreferences: {
+      preload: path.join(__dirname, 'preload.cjs'),
       contextIsolation: true,
       nodeIntegration: false,
-      sandbox: true
+      sandbox: false
     }
   });
 
@@ -51,6 +52,41 @@ function createWindow() {
     return { action: 'deny' };
   });
 }
+
+ipcMain.handle('copy-image', async (event, base64Data) => {
+  try {
+    let clean = base64Data;
+    if (clean.includes(',')) {
+      clean = clean.split(',')[1];
+    }
+    const buffer = Buffer.from(clean, 'base64');
+    const img = nativeImage.createFromBuffer(buffer);
+    clipboard.writeImage(img);
+    return true;
+  } catch (err) {
+    console.error('IPC copy-image error:', err);
+    return false;
+  }
+});
+
+ipcMain.handle('copy-text', async (event, text) => {
+  try {
+    clipboard.writeText(text);
+    return true;
+  } catch (err) {
+    console.error('IPC copy-text error:', err);
+    return false;
+  }
+});
+
+ipcMain.handle('open-external', async (event, url) => {
+  try {
+    await shell.openExternal(url);
+    return true;
+  } catch (err) {
+    return false;
+  }
+});
 
 app.whenReady().then(() => {
   createWindow();

@@ -29,6 +29,7 @@
     "productName": "Phoenix Edit Point QR",
     "files": [
       "main.cjs",
+      "preload.cjs",
       "www/**/*",
       "package.json"
     ],
