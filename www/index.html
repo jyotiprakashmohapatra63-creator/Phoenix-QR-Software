@@ -1082,6 +1082,228 @@
     #toast.show { opacity: 1; transform: translate(-50%, 0); }
     #toast i { color: var(--brass-light); }
 
+    /* Vintage Studio Share Modal */
+    .share-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: rgba(10, 8, 7, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .share-modal-backdrop.active {
+      display: flex;
+      opacity: 1;
+    }
+    .share-modal {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: #181310;
+      border: 2px solid var(--brass);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px var(--brass-glow);
+      color: var(--parchment);
+      animation: modalScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalScaleIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .share-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--wood-border);
+      margin-bottom: 16px;
+    }
+    .share-modal-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--brass-light);
+      font: 700 15px 'Cinzel', serif;
+      letter-spacing: 0.12em;
+    }
+    .share-modal-title i {
+      color: var(--brass);
+    }
+    .share-modal-close {
+      background: transparent;
+      border: 1px solid var(--wood-border);
+      color: var(--parchment-dim);
+      border-radius: 6px;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    .share-modal-close:hover {
+      border-color: var(--brass);
+      color: #fff;
+      background: rgba(201, 160, 80, 0.15);
+    }
+    .share-modal-preview {
+      display: flex;
+      gap: 14px;
+      padding: 12px;
+      background: #110e0c;
+      border: 1px solid var(--wood-border);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      align-items: center;
+    }
+    .share-modal-preview img {
+      width: 65px;
+      height: 92px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--brass);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .share-modal-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .share-info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      gap: 6px;
+    }
+    .share-info-row .info-label {
+      color: var(--parchment-muted);
+      font-family: 'Cinzel', serif;
+    }
+    .share-info-row .info-val {
+      color: var(--parchment);
+      font-family: 'Courier Prime', monospace;
+      font-weight: 700;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .share-info-row .info-val.highlight {
+      color: #34d399;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+    }
+    .share-options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .share-opt-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: #1f1814;
+      border: 1px solid var(--wood-border);
+      border-radius: 8px;
+      color: var(--parchment);
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      width: 100%;
+    }
+    .share-opt-btn:hover {
+      background: #281f1a;
+      border-color: var(--brass);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+    .share-opt-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+    .share-opt-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+    .share-opt-text strong {
+      font-family: 'Cinzel', serif;
+      font-size: 12.5px;
+      letter-spacing: 0.05em;
+    }
+    .share-opt-text span {
+      font-family: 'Marcellus', serif;
+      font-size: 11px;
+      color: var(--parchment-muted);
+      margin-top: 2px;
+    }
+    .share-opt-btn.btn-whatsapp .share-opt-icon {
+      background: rgba(37, 211, 102, 0.15);
+      color: #25d366;
+      border: 1px solid rgba(37, 211, 102, 0.4);
+    }
+    .share-opt-btn.btn-whatsapp:hover {
+      border-color: #25d366;
+      box-shadow: 0 4px 16px rgba(37, 211, 102, 0.25);
+    }
+    .share-opt-btn.btn-copy-photo .share-opt-icon {
+      background: rgba(201, 160, 80, 0.15);
+      color: var(--brass-light);
+      border: 1px solid var(--wood-border);
+    }
+    .share-opt-btn.btn-copy-text .share-opt-icon {
+      background: rgba(142, 27, 33, 0.25);
+      color: #ff9999;
+      border: 1px solid rgba(142, 27, 33, 0.5);
+    }
+    .share-opt-btn.btn-telegram .share-opt-icon {
+      background: rgba(36, 161, 222, 0.15);
+      color: #24A1DE;
+      border: 1px solid rgba(36, 161, 222, 0.4);
+    }
+    .share-opt-btn.btn-download-photo .share-opt-icon {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--parchment-dim);
+      border: 1px solid var(--wood-border);
+    }
+    .share-modal-tip {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: rgba(201, 160, 80, 0.08);
+      border: 1px dashed var(--wood-border);
+      border-radius: 6px;
+      color: var(--brass-light);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+    .share-modal-tip i {
+      margin-top: 2px;
+      color: var(--brass);
+    }
+
     @media (max-width: 940px) {
       .workspace { grid-template-columns: 1fr; gap: 20px; }
       .preview-column { position: static; }
@@ -1342,6 +1564,91 @@
     </main>
 
     <footer class="footer">PHOENIX EDIT POINT · DETAILS REMAIN SECURE IN BROWSER</footer>
+  </div>
+
+  <!-- Vintage Studio Share Modal -->
+  <div class="share-modal-backdrop" id="shareModalBackdrop" role="dialog" aria-modal="true" aria-label="Share Payment Slate">
+    <div class="share-modal" id="shareModal">
+      <div class="share-modal-header">
+        <div class="share-modal-title">
+          <i class="fa-solid fa-share-nodes"></i>
+          <span>SHARE PAYMENT SLATE</span>
+        </div>
+        <button class="share-modal-close" type="button" onclick="closeShareModal()" title="Close dialog">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      
+      <div class="share-modal-preview">
+        <img id="shareModalPreviewImg" src="" alt="Slate Preview" />
+        <div class="share-modal-info">
+          <div class="share-info-row">
+            <span class="info-label">STUDIO:</span>
+            <span class="info-val">Phoenix Edit Point</span>
+          </div>
+          <div class="share-info-row">
+            <span class="info-label">UPI ID:</span>
+            <span class="info-val" id="shareModalUpi">9348013917@nyes</span>
+          </div>
+          <div class="share-info-row">
+            <span class="info-label">AMOUNT:</span>
+            <span class="info-val highlight" id="shareModalAmount">ANY AMOUNT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="share-options-grid">
+        <!-- WhatsApp -->
+        <button class="share-opt-btn btn-whatsapp" type="button" onclick="handleShareWhatsApp()">
+          <div class="share-opt-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div class="share-opt-text">
+            <strong>Share via WhatsApp</strong>
+            <span>Photo copied to clipboard + opens WhatsApp chat</span>
+          </div>
+        </button>
+
+        <!-- Copy Photo -->
+        <button class="share-opt-btn btn-copy-photo" type="button" onclick="handleCopyPhotoToClipboard()">
+          <div class="share-opt-icon"><i class="fa-regular fa-image"></i></div>
+          <div class="share-opt-text">
+            <strong>Copy Photo to Clipboard</strong>
+            <span>Direct image copy — press Ctrl+V in any application</span>
+          </div>
+        </button>
+
+        <!-- Copy Details -->
+        <button class="share-opt-btn btn-copy-text" type="button" onclick="handleCopyDetailsText()">
+          <div class="share-opt-icon"><i class="fa-regular fa-copy"></i></div>
+          <div class="share-opt-text">
+            <strong>Copy Payment Text</strong>
+            <span>Studio name, UPI address & amount details</span>
+          </div>
+        </button>
+
+        <!-- Download Photo -->
+        <button class="share-opt-btn btn-download-photo" type="button" onclick="downloadPoster(); closeShareModal();">
+          <div class="share-opt-icon"><i class="fa-solid fa-download"></i></div>
+          <div class="share-opt-text">
+            <strong>Download Slate Image</strong>
+            <span>Save high-resolution PNG to your storage</span>
+          </div>
+        </button>
+
+        <!-- Telegram -->
+        <button class="share-opt-btn btn-telegram" type="button" onclick="handleShareTelegram()">
+          <div class="share-opt-icon"><i class="fa-brands fa-telegram"></i></div>
+          <div class="share-opt-text">
+            <strong>Share on Telegram</strong>
+            <span>Open Telegram Web or App with pre-filled message</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="share-modal-tip">
+        <i class="fa-solid fa-circle-info"></i>
+        <span><strong>Quick Tip:</strong> Click <em>"Share via WhatsApp"</em> or <em>"Copy Photo"</em>, then press <strong>Ctrl+V</strong> inside WhatsApp chat to paste the full payment slate photo!</span>
+      </div>
+    </div>
   </div>
 
   <div id="toast" role="status"><i class="fa-solid fa-certificate"></i><span id="toastText">Ready</span></div>
@@ -1711,15 +2018,52 @@
       return `Phoenix_Edit_Point_${suffix}.png`;
     }
 
-    function downloadQrOnly() {
+    async function triggerFileDownload(dataUrl, name) {
+      try {
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = name;
+        link.href = blobUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 10000);
+        return true;
+      } catch (err) {
+        const link = document.createElement('a');
+        link.download = name;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        return true;
+      }
+    }
+
+    async function downloadQrOnly() {
       try {
         const canvas = $('qrCanvas');
-        const link = document.createElement('a');
-        link.download = filename('QR');
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        showToast('QR PNG downloaded');
+        if (!canvas) {
+          showToast('QR Canvas not ready', 'error');
+          return;
+        }
+        const dataUrl = canvas.toDataURL('image/png');
+        const name = filename('QR');
+
+        // 1. Android APK Native Bridge (Saves directly to Gallery)
+        if (window.PhoenixNative && typeof window.PhoenixNative.downloadImage === 'function') {
+          showToast('Saving QR Code to Gallery…');
+          window.PhoenixNative.downloadImage(dataUrl, name);
+          return;
+        }
+
+        // 2. Standard Web & Desktop Download
+        await triggerFileDownload(dataUrl, name);
+        showToast('QR PNG downloaded successfully!');
       } catch (e) {
+        console.error('Download QR error:', e);
         showToast('Could not download QR', 'error');
       }
     }
@@ -1958,12 +2302,18 @@
       showToast('Rendering studio slate…');
       try {
         const canvas = await createSlateCanvas();
-        const link = document.createElement('a');
-        link.download = filename('Studio_Slate');
-        link.href = canvas.toDataURL('image/png');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const dataUrl = canvas.toDataURL('image/png');
+        const name = filename('Studio_Slate');
+
+        // 1. Android APK Native Bridge (Saves directly to Gallery / Pictures)
+        if (window.PhoenixNative && typeof window.PhoenixNative.downloadImage === 'function') {
+          showToast('Saving Slate to Gallery…');
+          window.PhoenixNative.downloadImage(dataUrl, name);
+          return;
+        }
+
+        // 2. Standard Web & Desktop Download
+        await triggerFileDownload(dataUrl, name);
         showToast('Slate downloaded successfully!');
       } catch (err) {
         console.error('Download error:', err);
@@ -2002,17 +2352,10 @@
       }
       const noteLine = (data.note && data.note.trim()) ? `\n❖ Note: ${data.note.trim()}` : '';
 
-      // Exact caption requested by user (photo with Add a message text)
+      // Clean, professional payment caption
       const shareText = `❖ Studio: ${studioName}\n❖ Name: ${ownerName}\n❖ UPI ID: ${upiId}\n❖ Amount: ${amountStr}${noteLine}\n\nScan the attached QR photo or pay directly via UPI.`;
 
-      showToast('Preparing photo & message…');
-
-      // Pre-copy caption text to clipboard as seamless backup
-      try {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          await navigator.clipboard.writeText(shareText);
-        }
-      } catch (clipPreErr) {}
+      showToast('Preparing photo & payment details…');
 
       let canvas = null;
       try {
@@ -2020,50 +2363,189 @@
       } catch (e) {
         canvas = createDirectSlateCanvas();
       }
+      const dataUrl = canvas.toDataURL('image/png');
+      const name = filename('Studio_Slate');
 
-      // 1. Try sharing Photo File + Caption text via Web Share API
-      if (canvas && navigator.share) {
+      state.currentShareData = {
+        canvas,
+        dataUrl,
+        filename: name,
+        text: shareText,
+        upiId,
+        amountStr
+      };
+
+      // 1. Android APK Native Bridge (100% reliable inside APK!)
+      if (window.PhoenixNative && typeof window.PhoenixNative.shareImage === 'function') {
+        window.PhoenixNative.shareImage(dataUrl, name, shareText);
+        showToast('Opening Share Sheet…');
+        return;
+      }
+
+      // 2. Web Share API with Files (Mobile Chrome, Safari, Edge if supported)
+      if (navigator.share && navigator.canShare) {
         try {
-          const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
-          if (blob) {
-            const file = new File([blob], filename('Studio_Slate'), { type: 'image/png' });
+          const res = await fetch(dataUrl);
+          const blob = await res.blob();
+          const file = new File([blob], name, { type: 'image/png' });
 
-            // In WhatsApp / mobile apps, passing text with file populates the "Add a message..." field
-            const payloadWithTextAndFile = {
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: 'Phoenix Edit Point Payment',
               text: shareText,
               files: [file]
-            };
-
-            const canShareFiles = navigator.canShare ? navigator.canShare({ files: [file] }) : true;
-            if (canShareFiles) {
-              await navigator.share(payloadWithTextAndFile);
-              showToast('Photo & message shared in 1 bubble!');
-              return;
-            }
+            });
+            showToast('Shared successfully!');
+            return;
           }
         } catch (shareErr) {
           if (shareErr.name === 'AbortError') return; // User closed share window
-          console.warn('File share not supported by target:', shareErr);
+          console.warn('Web Share API error:', shareErr);
         }
       }
 
-      // 2. Desktop Fallback:
-      // Download the photo & copy caption to clipboard so user pastes into "Add a message..." field to send as a single bubble!
+      // 3. Desktop / PC (.EXE) Fallback:
+      // Try to pre-copy image to clipboard immediately (so user can press Ctrl+V directly into WhatsApp Web or any app)
       try {
-        if (canvas) {
-          const link = document.createElement('a');
-          link.download = filename('Studio_Slate');
-          link.href = canvas.toDataURL('image/png');
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
+        if (window.ElectronNative?.copyImage) {
+          window.ElectronNative.copyImage(dataUrl);
+        } else {
+          const res = await fetch(dataUrl);
+          const blob = await res.blob();
+          if (navigator.clipboard && window.ClipboardItem) {
+            navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]).catch(() => {});
+          }
+        }
+      } catch (preErr) {}
+
+      // Pre-copy caption text to clipboard
+      try {
+        if (window.ElectronNative?.copyText) {
+          window.ElectronNative.copyText(shareText);
+        } else if (navigator.clipboard?.writeText) {
+          navigator.clipboard.writeText(shareText).catch(() => {});
+        }
+      } catch (preErr) {}
+
+      // Open the sleek Share Modal with options (WhatsApp Web, Copy Photo, Copy Text, Telegram, etc.)
+      openShareModal(state.currentShareData);
+    }
+
+    // Share Modal Controllers
+    function openShareModal(shareData) {
+      if (!shareData) return;
+      const previewImg = $('shareModalPreviewImg');
+      if (previewImg) previewImg.src = shareData.dataUrl;
+      const upiEl = $('shareModalUpi');
+      if (upiEl) upiEl.textContent = shareData.upiId;
+      const amtEl = $('shareModalAmount');
+      if (amtEl) amtEl.textContent = shareData.amountStr;
+
+      const backdrop = $('shareModalBackdrop');
+      if (backdrop) backdrop.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeShareModal() {
+      const backdrop = $('shareModalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    async function handleShareWhatsApp() {
+      if (!state.currentShareData) return;
+      const { dataUrl, text } = state.currentShareData;
+
+      // Copy image to clipboard so Ctrl+V in WhatsApp sends the photo!
+      try {
+        if (window.ElectronNative?.copyImage) {
+          await window.ElectronNative.copyImage(dataUrl);
+        } else {
+          const res = await fetch(dataUrl);
+          const blob = await res.blob();
+          if (navigator.clipboard && window.ClipboardItem) {
+            await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+          }
+        }
+      } catch (e) {
+        console.warn('Clipboard image copy error:', e);
+      }
+
+      const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      if (window.ElectronNative?.openExternal) {
+        window.ElectronNative.openExternal(waUrl);
+      } else {
+        window.open(waUrl, '_blank');
+      }
+
+      showToast('WhatsApp opened! Photo clipboard me hai (Ctrl+V karein)', 'success');
+      closeShareModal();
+    }
+
+    async function handleCopyPhotoToClipboard() {
+      if (!state.currentShareData) return;
+      const { dataUrl } = state.currentShareData;
+
+      showToast('Copying photo to clipboard…');
+      try {
+        if (window.ElectronNative?.copyImage) {
+          const ok = await window.ElectronNative.copyImage(dataUrl);
+          if (ok) {
+            showToast('Slate Photo Copied! Press Ctrl+V in any app');
+            closeShareModal();
+            return;
+          }
         }
 
-        await navigator.clipboard.writeText(shareText);
-        showToast('Photo ready! "Add a message" me Paste (Ctrl+V) karein');
-      } catch (clipErr) {
-        copyUpiId();
+        const res = await fetch(dataUrl);
+        const blob = await res.blob();
+        if (navigator.clipboard && window.ClipboardItem) {
+          await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+          showToast('Slate Photo Copied! Press Ctrl+V in any app');
+          closeShareModal();
+          return;
+        }
+      } catch (err) {
+        console.warn('Copy photo error:', err);
       }
+      showToast('Could not copy directly; downloading instead', 'error');
+      downloadPoster();
+      closeShareModal();
+    }
+
+    async function handleCopyDetailsText() {
+      if (!state.currentShareData) return;
+      const { text } = state.currentShareData;
+      try {
+        if (window.ElectronNative?.copyText) {
+          await window.ElectronNative.copyText(text);
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          ta.remove();
+        }
+        showToast('Payment message copied to clipboard!');
+        closeShareModal();
+      } catch (err) {
+        showToast('Could not copy message', 'error');
+      }
+    }
+
+    function handleShareTelegram() {
+      if (!state.currentShareData) return;
+      const { text } = state.currentShareData;
+      const tgUrl = `https://t.me/share/url?text=${encodeURIComponent(text)}`;
+      if (window.ElectronNative?.openExternal) {
+        window.ElectronNative.openExternal(tgUrl);
+      } else {
+        window.open(tgUrl, '_blank');
+      }
+      closeShareModal();
     }
 
     function loadSampleData() {
@@ -2089,6 +2571,17 @@
 
     // Initialize once DOM is ready
     window.addEventListener('DOMContentLoaded', () => {
+      // Close share modal when clicking outside or pressing Escape
+      const modalBackdrop = $('shareModalBackdrop');
+      if (modalBackdrop) {
+        modalBackdrop.addEventListener('click', (e) => {
+          if (e.target === modalBackdrop) closeShareModal();
+        });
+      }
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeShareModal();
+      });
+
       // Restore saved colors or use defaults
       try {
         const savedBrass = localStorage.getItem('phoenix_brass_color');
