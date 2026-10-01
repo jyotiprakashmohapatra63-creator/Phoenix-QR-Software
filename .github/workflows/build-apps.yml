@@ -46,6 +46,7 @@ jobs:
 
       - run: |
           npx cap add android
+          node scripts/patch-android.js
           npx cap sync android
 
       - working-directory: android
